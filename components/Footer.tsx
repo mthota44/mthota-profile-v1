@@ -20,10 +20,10 @@ const Footer: React.FC = () => {
             <div className="container mx-auto py-6 px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center text-slate-400">
                 <p className="text-sm order-2 sm:order-1 mt-4 sm:mt-0">&copy; {new Date().getFullYear()} Venkata Manoj Kumar Thota. All rights reserved.</p>
                 <div className="flex space-x-6 order-1 sm:order-2">
-                    <a href="https://linkedin.com/in/venkata-manoj-kumar-thota" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+                    <a href="https://linkedin.com/in/venkata-manoj-kumar-thota-2410a01ba" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
                         <LinkedInIcon />
                     </a>
-                    <a href="https://github.com/venkata-manoj" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+                    <a href="https://github.com/mthota44" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
                         <GithubIcon />
                     </a>
                 </div>
