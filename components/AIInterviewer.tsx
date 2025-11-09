@@ -59,7 +59,7 @@ const AIInterviewer: React.FC = () => {
         setLoadingAction('practice');
         setError(null);
         try {
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+            const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
             const response = await ai.models.generateContent({
                 model: "gemini-2.5-flash",
                 contents: `Based on a job role of "${domain}" with ${experience} of experience, generate a list of 5-7 key technical and behavioral topics that are essential to prepare for an interview.`,
