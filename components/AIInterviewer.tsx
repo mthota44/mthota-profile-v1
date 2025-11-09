@@ -93,7 +93,7 @@ const AIInterviewer: React.FC = () => {
         setError(null);
         setMessages([]);
         try {
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+            const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
             const systemInstruction = `You are an AI assistant conducting a practice session on the topic of "${topic}" for a candidate with ${experience} of experience in "${domain}". Your goal is to help the candidate learn.
 1. Start with a basic conceptual question.
 2. Ask questions one by one, progressing from basic to advanced.
@@ -127,7 +127,7 @@ const AIInterviewer: React.FC = () => {
         setMessages([]);
 
         try {
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+            const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
             const systemInstruction = `You are a professional AI interviewer conducting a technical and behavioral interview for a "${domain}" position, targeting a candidate with ${experience} of experience.
 1. Introduce yourself briefly and state the role you are interviewing for.
 2. Ask a mix of relevant technical and behavioral questions.
@@ -181,7 +181,7 @@ Begin the interview now.`;
             const history = await chatRef.current?.getHistory();
             if(!history) throw new Error("Could not retrieve conversation history.");
 
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+            const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
             const response = await ai.models.generateContent({
                  model: "gemini-2.5-flash",
                  contents: [
