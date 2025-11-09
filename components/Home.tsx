@@ -30,7 +30,6 @@ const DownloadIcon = () => (
 
 
 const Home: React.FC = () => {
-    // IMPORTANT: Paste your Supabase resume URL here!
     const resumeUrl = "https://tgvhzimcckrtrxdfpdzw.supabase.co/storage/v1/object/public/portfolio-assets/manoj_javafullstack_mss.pdf";
 
     return (
@@ -54,10 +53,14 @@ const Home: React.FC = () => {
                         </a>
                     </div>
                 </div>
-                <div className="flex justify-center items-center animate-fade-in" style={{ animationDelay: '600ms' }}>
+                <div className="flex flex-col justify-center items-center animate-fade-in" style={{ animationDelay: '600ms' }}>
                     <div className="relative w-64 h-64 sm:w-72 sm:h-72 group">
                         <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
                         <img src={profileImage} alt="Thota Venkata Manoj Kumar" className="relative w-full h-full object-cover rounded-full border-4 border-slate-800" />
+                    </div>
+                    <div className="mt-6 text-center">
+                        <p className="text-xl font-bold text-white">Jr. Technical Associate</p>
+                        <p className="text-md text-slate-400 mt-1">Miracle Software Systems</p>
                     </div>
                 </div>
             </section>
