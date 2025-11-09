@@ -40,11 +40,7 @@ const AIInterviewer: React.FC = () => {
     const [topics, setTopics] = useState<string[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
     const [userInput, setUserInput] = useState('');
-    
-    // BUG FIX: Use separate loading states for setup buttons vs. chat interactions
-    const [setupLoading, setSetupLoading] = useState<'practice' | 'interview' | null>(null);
-    const [isLoading, setIsLoading] = useState(false); // For chat and other async actions
-
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [feedback, setFeedback] = useState<Feedback | null>(null);
 
@@ -60,7 +56,7 @@ const AIInterviewer: React.FC = () => {
             setError("Please enter both domain and experience.");
             return;
         }
-        setSetupLoading('practice'); // Use specific loading state
+        setIsLoading(true);
         setError(null);
         try {
             const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
@@ -88,7 +84,7 @@ const AIInterviewer: React.FC = () => {
         } catch (err: any) {
             setError(err.message || "Failed to fetch topics.");
         } finally {
-            setSetupLoading(null); // Reset specific loading state
+            setIsLoading(false);
         }
     };
 
@@ -126,7 +122,7 @@ const AIInterviewer: React.FC = () => {
             setError("Please enter both domain and experience.");
             return;
         }
-        setSetupLoading('interview'); // Use specific loading state
+        setIsLoading(true);
         setError(null);
         setMessages([]);
 
@@ -152,7 +148,7 @@ Begin the interview now.`;
         } catch (err: any) {
             setError(err.message || "Failed to start the interview session.");
         } finally {
-            setSetupLoading(null); // Reset specific loading state
+            setIsLoading(false);
         }
     };
     
@@ -282,12 +278,8 @@ Begin the interview now.`;
                                 <input id="experience" type="text" value={experience} onChange={(e) => setExperience(e.target.value)} placeholder="e.g., 3 Years" className="mt-1 w-full bg-slate-700 border-slate-600 rounded-md p-3 text-white"/>
                             </div>
                             <div className="flex gap-4 pt-4">
-                                <button onClick={handleStartPractice} className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 rounded-lg transition-colors disabled:bg-slate-600" disabled={!!setupLoading}>
-                                    {setupLoading === 'practice' ? 'Loading...' : 'Start Practice'}
-                                </button>
-                                <button onClick={handleStartInterview} className="w-full bg-slate-600 hover:bg-slate-500 text-white font-bold py-3 rounded-lg transition-colors disabled:bg-slate-600" disabled={!!setupLoading}>
-                                    {setupLoading === 'interview' ? 'Loading...' : 'Start Interview'}
-                                </button>
+                                <button onClick={handleStartPractice} className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 rounded-lg transition-colors disabled:bg-slate-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Start Practice'}</button>
+                                <button onClick={handleStartInterview} className="w-full bg-slate-600 hover:bg-slate-500 text-white font-bold py-3 rounded-lg transition-colors disabled:bg-slate-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Start Interview'}</button>
                             </div>
                             {error && <p className="text-red-400 mt-2 text-center">{error}</p>}
                         </div>

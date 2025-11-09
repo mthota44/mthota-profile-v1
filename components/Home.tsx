@@ -22,8 +22,17 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     </div>
 );
 
+const DownloadIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+    </svg>
+);
+
 
 const Home: React.FC = () => {
+    // IMPORTANT: Paste your Supabase resume URL here!
+    const resumeUrl = "https://tgvhzimcckrtrxdfpdzw.supabase.co/storage/v1/object/public/portfolio-assets/manoj_javafullstack_mss.pdf";
+
     return (
         <div className="space-y-20 md:space-y-28 text-slate-300">
             {/* Hero Section */}
@@ -35,9 +44,13 @@ const Home: React.FC = () => {
                     <p className="text-slate-400 max-w-xl leading-relaxed pt-4 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
                         I'm a Spring Boot Developer with 3+ years of expertise in microservices and cloud-native applications. I specialize in architecting scalable solutions and have a passion for delivering high-performance, user-centric products.
                     </p>
-                    <div className="pt-6 animate-fade-in-up" style={{ animationDelay: '500ms' }}>
-                        <a href="mailto:venkatamanojkumarthota@gmail.com" className="inline-block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-lg transition-transform duration-200 hover:scale-105 shadow-lg shadow-cyan-500/30">
+                    <div className="pt-6 animate-fade-in-up flex flex-wrap gap-4" style={{ animationDelay: '500ms' }}>
+                        <a href="mailto:venkatamanojkumarthota@gmail.com" className="inline-block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-transform duration-200 hover:scale-105 shadow-lg shadow-cyan-500/30">
                             Get In Touch
+                        </a>
+                         <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-transparent hover:bg-cyan-500/10 border-2 border-cyan-500 text-cyan-400 font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                            <DownloadIcon />
+                            Download Resume
                         </a>
                     </div>
                 </div>
