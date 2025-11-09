@@ -40,7 +40,7 @@ const AIInterviewer: React.FC = () => {
     const [topics, setTopics] = useState<string[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
     const [userInput, setUserInput] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [loadingAction, setLoadingAction] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [feedback, setFeedback] = useState<Feedback | null>(null);
 
@@ -56,10 +56,10 @@ const AIInterviewer: React.FC = () => {
             setError("Please enter both domain and experience.");
             return;
         }
-        setIsLoading(true);
+        setLoadingAction('practice');
         setError(null);
         try {
-            const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
+            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
             const response = await ai.models.generateContent({
                 model: "gemini-2.5-flash",
                 contents: `Based on a job role of "${domain}" with ${experience} of experience, generate a list of 5-7 key technical and behavioral topics that are essential to prepare for an interview.`,
@@ -84,12 +84,12 @@ const AIInterviewer: React.FC = () => {
         } catch (err: any) {
             setError(err.message || "Failed to fetch topics.");
         } finally {
-            setIsLoading(false);
+            setLoadingAction(null);
         }
     };
 
     const handleSelectTopic = async (topic: string) => {
-        setIsLoading(true);
+        setLoadingAction('select_topic');
         setError(null);
         setMessages([]);
         try {
@@ -113,7 +113,7 @@ const AIInterviewer: React.FC = () => {
         } catch (err: any) {
             setError(err.message || "Failed to start the practice session.");
         } finally {
-            setIsLoading(false);
+            setLoadingAction(null);
         }
     };
 
@@ -122,7 +122,7 @@ const AIInterviewer: React.FC = () => {
             setError("Please enter both domain and experience.");
             return;
         }
-        setIsLoading(true);
+        setLoadingAction('interview');
         setError(null);
         setMessages([]);
 
@@ -148,18 +148,18 @@ Begin the interview now.`;
         } catch (err: any) {
             setError(err.message || "Failed to start the interview session.");
         } finally {
-            setIsLoading(false);
+            setLoadingAction(null);
         }
     };
     
     const handleSendMessage = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!userInput.trim() || isLoading || !chatRef.current) return;
+        if (!userInput.trim() || loadingAction === 'send_message' || !chatRef.current) return;
 
         const newUserMessage: Message = { sender: 'user', text: userInput };
         setMessages(prev => [...prev, newUserMessage]);
         setUserInput('');
-        setIsLoading(true);
+        setLoadingAction('send_message');
 
         try {
             const response = await chatRef.current.sendMessage({ message: userInput });
@@ -170,12 +170,12 @@ Begin the interview now.`;
             const errorResponse: Message = { sender: 'ai', text: "Sorry, I encountered an error. Please try again." };
             setMessages(prev => [...prev, errorResponse]);
         } finally {
-            setIsLoading(false);
+            setLoadingAction(null);
         }
     };
 
     const handleEndInterview = async () => {
-        setIsLoading(true);
+        setLoadingAction('end_interview');
         setError(null);
         try {
             const history = await chatRef.current?.getHistory();
@@ -206,7 +206,7 @@ Begin the interview now.`;
         } catch (err: any) {
             setError(err.message || "Failed to generate feedback.");
         }
-        setIsLoading(false);
+        setLoadingAction(null);
     };
 
     const handleReset = () => {
@@ -238,7 +238,7 @@ Begin the interview now.`;
          <div className="flex flex-col h-[80vh] max-w-3xl mx-auto bg-slate-800/50 rounded-lg border border-slate-700 shadow-xl">
             <div className="p-4 border-b border-slate-700 flex justify-between items-center">
                 <h2 className="text-xl font-bold text-white">{title}</h2>
-                {showEndButton && <button onClick={handleEndInterview} disabled={isLoading} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium transition-colors disabled:bg-slate-600">End Interview</button>}
+                {showEndButton && <button onClick={handleEndInterview} disabled={loadingAction !== null} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium transition-colors disabled:bg-slate-600">End Interview</button>}
                  {mode === 'practice_session' && <button onClick={handleReset} className="bg-slate-600 hover:bg-slate-500 text-white px-3 py-1 rounded-md text-sm font-medium">Change Topic</button>}
             </div>
             <div className="flex-1 p-6 overflow-y-auto space-y-4">
@@ -249,13 +249,13 @@ Begin the interview now.`;
                         </div>
                     </div>
                 ))}
-                {isLoading && <div className="flex justify-start"><div className="bg-slate-700 text-slate-300 p-3 rounded-lg">AI is thinking...</div></div>}
+                {loadingAction === 'send_message' && <div className="flex justify-start"><div className="bg-slate-700 text-slate-300 p-3 rounded-lg">AI is thinking...</div></div>}
                 <div ref={messagesEndRef} />
             </div>
             <div className="p-4 border-t border-slate-700">
                 <form onSubmit={handleSendMessage} className="flex gap-4">
-                    <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder="Your answer..." className="flex-1 bg-slate-700 border-slate-600 rounded-md p-2 text-white focus:ring-cyan-500 focus:border-cyan-500" disabled={isLoading}/>
-                    <button type="submit" className="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:bg-slate-600" disabled={isLoading || !userInput.trim()}>Send</button>
+                    <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder="Your answer..." className="flex-1 bg-slate-700 border-slate-600 rounded-md p-2 text-white focus:ring-cyan-500 focus:border-cyan-500" disabled={loadingAction === 'send_message'}/>
+                    <button type="submit" className="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:bg-slate-600" disabled={loadingAction === 'send_message' || !userInput.trim()}>Send</button>
                 </form>
             </div>
         </div>
@@ -278,8 +278,8 @@ Begin the interview now.`;
                                 <input id="experience" type="text" value={experience} onChange={(e) => setExperience(e.target.value)} placeholder="e.g., 3 Years" className="mt-1 w-full bg-slate-700 border-slate-600 rounded-md p-3 text-white"/>
                             </div>
                             <div className="flex gap-4 pt-4">
-                                <button onClick={handleStartPractice} className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 rounded-lg transition-colors disabled:bg-slate-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Start Practice'}</button>
-                                <button onClick={handleStartInterview} className="w-full bg-slate-600 hover:bg-slate-500 text-white font-bold py-3 rounded-lg transition-colors disabled:bg-slate-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Start Interview'}</button>
+                                <button onClick={handleStartPractice} className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 rounded-lg transition-colors disabled:bg-slate-600" disabled={loadingAction !== null}>{loadingAction === 'practice' ? 'Loading...' : 'Start Practice'}</button>
+                                <button onClick={handleStartInterview} className="w-full bg-slate-600 hover:bg-slate-500 text-white font-bold py-3 rounded-lg transition-colors disabled:bg-slate-600" disabled={loadingAction !== null}>{loadingAction === 'interview' ? 'Loading...' : 'Start Interview'}</button>
                             </div>
                             {error && <p className="text-red-400 mt-2 text-center">{error}</p>}
                         </div>
@@ -291,11 +291,11 @@ Begin the interview now.`;
                  <div className="max-w-2xl mx-auto text-center">
                      <h2 className="text-3xl font-bold text-white">Select a Topic</h2>
                      <p className="mt-2 text-slate-400">Choose a topic to practice for your {domain} interview.</p>
-                     {isLoading ? <p className="mt-8">Loading topics...</p> : (
+                     {loadingAction === 'practice' ? <p className="mt-8">Loading topics...</p> : (
                          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
                              {topics.map(topic => (
-                                 <button key={topic} onClick={() => handleSelectTopic(topic)} className="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-cyan-400 font-semibold p-4 rounded-lg text-left transition-colors">
-                                     {topic}
+                                 <button key={topic} onClick={() => handleSelectTopic(topic)} disabled={loadingAction === 'select_topic'} className="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-cyan-400 font-semibold p-4 rounded-lg text-left transition-colors disabled:bg-slate-700 disabled:text-slate-400">
+                                     {loadingAction === 'select_topic' ? 'Starting...' : topic}
                                  </button>
                              ))}
                          </div>
@@ -311,7 +311,7 @@ Begin the interview now.`;
             return (
                 <div className="max-w-2xl mx-auto text-center p-8 bg-slate-800/50 rounded-lg border border-slate-700">
                     <h2 className="text-3xl font-bold text-white">Interview Feedback</h2>
-                    {isLoading ? <p>Generating feedback...</p> : feedback && (
+                    {loadingAction === 'end_interview' ? <p>Generating feedback...</p> : feedback && (
                        <div className="mt-6 space-y-6">
                            <div>
                                <h3 className="text-xl font-semibold text-slate-300">Your Rating</h3>
