@@ -7,7 +7,9 @@ const Header: React.FC = () => {
     const { session, activeView, setActiveView } = useAuth();
 
     const handleLogout = async () => {
-        await supabase.auth.signOut();
+        // By specifying 'local' scope, we ensure only the current session is logged out,
+        // which is more reliable and avoids the 403 Forbidden error.
+        await supabase.auth.signOut({ scope: 'local' });
     };
 
     const navItems: AppView[] = ['Home', 'Interview Community', 'AI Interviewer', 'Contact'];
