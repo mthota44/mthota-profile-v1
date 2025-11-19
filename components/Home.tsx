@@ -14,7 +14,7 @@ const skills = {
 const profileImage = "https://raw.githubusercontent.com/mthota44/my-profile-assets/refs/heads/main/mthota_mss.jpg";
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <div className="text-center mb-12 animate-fade-in-up" style={{ animationDelay: '100ms'}}>
+    <div className="text-center mb-12 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
         <h2 className="text-3xl md:text-4xl font-bold text-white relative inline-block">
             {children}
             <span className="absolute -bottom-2.5 left-0 w-full h-1 bg-cyan-500 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
@@ -37,7 +37,7 @@ const Home: React.FC = () => {
             {/* Hero Section */}
             <section className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
                 <div className="md:col-span-2 space-y-4">
-                    <span className="text-lg text-cyan-400 font-mono animate-fade-in-up" style={{ animationDelay: '100ms' }}>Hi, my name is</span>
+                    <span className="text-lg text-cyan-400 font-mono animate-fade-in-up" style={{ animationDelay: '100ms' }}>Hi, I'm</span>
                     <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight animate-fade-in-up" style={{ animationDelay: '200ms' }}>Thota Venkata Manoj Kumar.</h1>
                     <h2 className="text-3xl sm:text-5xl font-bold text-slate-400 tracking-tight animate-fade-in-up" style={{ animationDelay: '300ms' }}>I build things for the web.</h2>
                     <p className="text-slate-400 max-w-xl leading-relaxed pt-4 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
@@ -47,7 +47,7 @@ const Home: React.FC = () => {
                         <a href="mailto:venkatamanojkumarthota@gmail.com" className="inline-block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-transform duration-200 hover:scale-105 shadow-lg shadow-cyan-500/30">
                             Get In Touch
                         </a>
-                         <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-transparent hover:bg-cyan-500/10 border-2 border-cyan-500 text-cyan-400 font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                        <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-transparent hover:bg-cyan-500/10 border-2 border-cyan-500 text-cyan-400 font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                             <DownloadIcon />
                             Download Resume
                         </a>
@@ -92,14 +92,14 @@ const Home: React.FC = () => {
                         <p className="text-cyan-400 font-semibold">MIRACLE SOFTWARE SYSTEMS</p>
                         <time className="text-sm font-normal leading-none text-slate-500">Jul 2022 - Present</time>
                         <ul className="mt-4 list-disc list-inside text-slate-400 space-y-2">
-                           <li>Architected enterprise Spring Boot microservices serving 10,000+ users, improving system performance by 40%.</li>
-                           <li>Optimized MySQL performance via Hibernate ORM and advanced query techniques, reducing response times by 50%.</li>
-                           <li>Led monolithic to microservices migration using Spring Cloud, Docker, and Kubernetes.</li>
-                           <li>Implemented secure authentication using JWT/OAuth2, ensuring enterprise-grade security standards.</li>
+                            <li>Architected enterprise Spring Boot microservices serving 10,000+ users, improving system performance by 40%.</li>
+                            <li>Optimized MySQL performance via Hibernate ORM and advanced query techniques, reducing response times by 50%.</li>
+                            <li>Led monolithic to microservices migration using Spring Cloud, Docker, and Kubernetes.</li>
+                            <li>Implemented secure authentication using JWT/OAuth2, ensuring enterprise-grade security standards.</li>
                         </ul>
                     </div>
                     <div className="ml-8 pl-4 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-                         <div className="absolute -left-2.5 mt-1.5 w-5 h-5 bg-cyan-500 rounded-full border-4 border-slate-900"></div>
+                        <div className="absolute -left-2.5 mt-1.5 w-5 h-5 bg-cyan-500 rounded-full border-4 border-slate-900"></div>
                         <h3 className="text-xl font-bold text-white">Software Development Intern</h3>
                         <p className="text-cyan-400 font-semibold">MIRACLE SOFTWARE SYSTEMS</p>
                         <time className="text-sm font-normal leading-none text-slate-500">Jan 2021 - Jun 2022</time>
@@ -112,7 +112,7 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
-             {/* Key Projects Section */}
+            {/* Key Projects Section */}
             <section id="projects">
                 <SectionTitle>Key Projects</SectionTitle>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -122,10 +122,10 @@ const Home: React.FC = () => {
                         <time className="text-sm text-slate-500">Jan 2024 - Present</time>
                         <p className="mt-4 text-slate-400">A comprehensive end-to-end recruitment application featuring role-based access control, workflow management, and enterprise-grade security.</p>
                         <ul className="mt-4 flex flex-wrap gap-2">
-                           <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">Spring Boot</li>
-                           <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">ReactJS</li>
-                           <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">MySQL</li>
-                           <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">Swagger</li>
+                            <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">Spring Boot</li>
+                            <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">ReactJS</li>
+                            <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">MySQL</li>
+                            <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">Swagger</li>
                         </ul>
                     </div>
                     {/* Project 2 */}
@@ -133,20 +133,20 @@ const Home: React.FC = () => {
                         <h3 className="text-xl font-bold text-white">Health Management Portal</h3>
                         <time className="text-sm text-slate-500">Jul 2022 - Dec 2024</time>
                         <p className="mt-4 text-slate-400">A patient-centric healthcare application with secure medical record management, appointment scheduling, and telemedicine capabilities.</p>
-                         <ul className="mt-4 flex flex-wrap gap-2">
-                           <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">Spring Boot</li>
-                           <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">React</li>
-                           <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">MySQL</li>
-                           <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">Healthcare APIs</li>
+                        <ul className="mt-4 flex flex-wrap gap-2">
+                            <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">Spring Boot</li>
+                            <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">React</li>
+                            <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">MySQL</li>
+                            <li className="bg-slate-700 text-cyan-300 text-xs font-semibold px-2.5 py-1 rounded-full">Healthcare APIs</li>
                         </ul>
                     </div>
                 </div>
             </section>
-             
+
             {/* Education & Achievements */}
             <section id="education">
-                 <SectionTitle>Education & Achievements</SectionTitle>
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <SectionTitle>Education & Achievements</SectionTitle>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     <div className="bg-slate-800/50 rounded-lg p-6 border border-slate-700 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
                         <h3 className="text-xl font-semibold text-white mb-4">Education</h3>
                         <div className="text-slate-400">
@@ -157,7 +157,7 @@ const Home: React.FC = () => {
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-6 border border-slate-700 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
                         <h3 className="text-xl font-semibold text-white mb-4">Achievements</h3>
-                         <ul className="space-y-2 text-slate-400">
+                        <ul className="space-y-2 text-slate-400">
                             <li><span className="text-cyan-400 mr-2">✦</span>Best Employee Award Recipient, FY24</li>
                             <li><span className="text-cyan-400 mr-2">✦</span>Best Performer Award Recipient, FY23</li>
                         </ul>
