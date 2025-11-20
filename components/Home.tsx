@@ -11,7 +11,7 @@ const skills = {
     "Monitoring": ["OpenTelemetry", "Spring Cloud"]
 };
 
-const profileImage = "https://raw.githubusercontent.com/mthota44/my-profile-assets/refs/heads/main/mthota_mss.jpg";
+const profileImage = "https://raw.githubusercontent.com/mthota44/my-profile-assets/refs/heads/main/mthot_java_mss.png";
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <div className="text-center mb-12 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
